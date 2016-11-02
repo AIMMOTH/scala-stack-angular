@@ -1,8 +1,9 @@
+/.worksheet/
 /.cache-main
 /.cache-tests
 /.classpath
 /.project
-/dev*
+/*.bat
 /.externalToolBuilders/
 /.settings/
 /project/project/
@@ -11,3 +12,4 @@
 /src/main/webapp/WEB-INF/classes/
 /src/main/webapp/WEB-INF/lib/
 /target/
+/WEB-INF/

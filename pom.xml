@@ -4,21 +4,31 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.cenet</groupId>
-  <artifactId>iso-scala</artifactId>
+  <groupId>com.github.aimmoth.scalastack</groupId>
+  <artifactId>scala-stack</artifactId>
 
   <packaging>war</packaging>
-  <name>Full Iso Morphic Scala</name>
-  <version>1.0-SNAPSHOT</version>
+  <name>Scala Stack</name>
+  <version>0.2-SNAPSHOT</version>
+
+  <description>Scala Stack using Google Flexible Environment with backend producing HTML, CSS and JavaScript with out any files (.html, .css, .sass, .less, .js) and with out any frontend builders like Gulp or Grunt.</description>
+
+  <url>https://github.com/aimmoth/scala-stack/tree/jquery</url>
+
+  <developers>
+    <developer>
+      <name>Carl Emmoth</name>
+      <url>https://github.com/aimmoth</url>
+    </developer>
+  </developers>
 
   <properties>
     <app.id>iso-scala-us</app.id>
     <app.version>master</app.version>
-    <scala.version>2.11.8</scala.version>
     <appengine.version>1.9.38</appengine.version>
     <scala.version>2.11.8</scala.version>
-    <scala.js.version>0.6.9</scala.js.version>
-    <gcloud.plugin.version>2.0.9.111.v20160525</gcloud.plugin.version>
+    <scala.js.version>0.6.10</scala.js.version>
+    <gcloud.plugin.version>2.0.9.121.v20160815</gcloud.plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
   </properties>
@@ -26,7 +36,6 @@
   <prerequisites>
     <maven>3.1.0</maven>
   </prerequisites>
-
 
   <dependencies>
     <dependency>
@@ -40,9 +49,26 @@
       <version>3.1.0</version>
     </dependency>
     <dependency>
-      <groupId>io.cenet.compiler.servlet</groupId>
-      <artifactId>servlet-scalajs-compiler</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <groupId>com.github.aimmoth.compiler.jetty</groupId>
+      <artifactId>jetty-scalajs-compiler</artifactId>
+      <version>0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>com.googlecode.objectify</groupId>
+      <artifactId>objectify</artifactId>
+      <version>5.1.11</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.containers</groupId>
+      <artifactId>jersey-container-servlet</artifactId>
+      <!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core" -->
+      <!-- <artifactId>jersey-container-servlet-core</artifactId> -->
+      <version>2.18</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.7</version>
     </dependency>
 
     <!-- Scala -->
@@ -55,11 +81,6 @@
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-compiler</artifactId>
       <version>${scala.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.lihaoyi</groupId>
-      <artifactId>scalatags_2.11</artifactId>
-      <version>0.5.4</version>
     </dependency>
 
     <!-- Scala JS -->
@@ -83,7 +104,32 @@
     <dependency>
       <groupId>org.scala-js</groupId>
       <artifactId>scalajs-dom_sjs0.6_2.11</artifactId>
-      <version>0.9.0</version>
+      <version>0.9.1</version>
+    </dependency>
+    <dependency>
+      <groupId>biz.enef</groupId>
+      <artifactId>scalajs-angulate_sjs0.6_2.11</artifactId>
+      <version>0.2.4</version>
+    </dependency>
+<!--     <dependency> -->
+<!--       <groupId>be.doeraene</groupId> -->
+<!--       <artifactId>scalajs-jquery_sjs0.6_2.11</artifactId> -->
+<!--       <version>0.9.0</version> -->
+<!--     </dependency> -->
+    <dependency>
+      <groupId>com.lihaoyi</groupId>
+      <artifactId>scalatags_sjs0.6_2.11</artifactId>
+      <version>0.6.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.lihaoyi</groupId>
+      <artifactId>upickle_sjs0.6_2.11</artifactId>
+      <version>0.4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scala-js</groupId>
+      <artifactId>scala-parser-combinators_sjs0.6_2.11</artifactId>
+      <version>1.0.2</version>
     </dependency>
 
     <dependency>
@@ -127,6 +173,7 @@
     <!-- for hot reload of the web application -->
     <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
     <plugins>
+
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
@@ -151,7 +198,13 @@
             </goals>
             <configuration>
               <sources>
-                <source>src/main/webapp/scalajs</source>
+
+                <!-- IMPORTANT -->
+                <!-- This is also set in JavascriptCompiler.scala -->
+
+                <source>src/main/webapp/scalajs-source</source>
+
+
               </sources>
             </configuration>
           </execution>
@@ -181,6 +234,7 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <groupId>org.scala-tools</groupId>
         <artifactId>maven-scala-plugin</artifactId>
@@ -201,6 +255,7 @@
           </jvmArgs>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <version>3.3</version>
@@ -210,6 +265,7 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
@@ -226,23 +282,7 @@
           </webResources>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>com.google.appengine</groupId>
-        <artifactId>appengine-maven-plugin</artifactId>
-        <version>${appengine.version}</version>
-        <configuration>
-          <enableJarClasses>false</enableJarClasses>
-          <appId>${app.id}</appId>
-          <version>${app.version}</version>
-          <!-- Comment in the below snippet to bind to all IPs instead of 
-            just localhost -->
-          <!-- <address>0.0.0.0</address> -->
-          <!-- <port>8081</port> -->
-          <!-- <jvmFlags> -->
-          <!-- <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag> -->
-          <!-- </jvmFlags> -->
-        </configuration>
-      </plugin>
+
       <plugin>
         <groupId>com.google.appengine</groupId>
         <artifactId>gcloud-maven-plugin</artifactId>

@@ -3,4 +3,47 @@
      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
   version="3.1">
 
+  <!-- https://jersey.java.net/nonav/documentation/latest/user-guide.html -->
+  <servlet>
+    <servlet-name>jersey_web_application</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      
+      <!-- IMPORTANT -->
+      <!-- Set correct package for your Jersey classes -->
+      <param-value>jvm.api</param-value>
+      
+      
+    </init-param>
+    <init-param>
+      <!-- speed up initial Jersey loading by deactivating WADL -->
+      <param-name>jersey.config.server.wadl.disableWadl</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jersey_web_application</servlet-name>
+    <url-pattern>/api/v1/*</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>objectify</filter-name>
+    <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>objectify</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>HtmlFilter</filter-name>
+    <filter-class>jvm.filter.HtmlFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>HtmlFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
 </web-app>

@@ -1,10 +1,10 @@
-# ISO SCALA
+# SCALA STACK
 
-Backend serve HTML, JavaScript and CSS from Scala! No frontend build (gulp, grun), no files (js, css, html, sass, less)!
+Scala Stack serve HTML, JavaScript and CSS from Scala code! No frontend build (gulp, grunt), no files (js, css, html, sass, less)!
 
 ## Description
 
-Backend Scala servlets serve a HTML file build with ScalaTags and ScalaCSS, and a JavaScript hot compiled from Scala JS source read from webapp. 
+In this project, a servlet serve a HTML file build with ScalaTags, and another servlet serve JavaScript hot compiled from Scala JS source. 
 
 ## Environment
 
@@ -12,11 +12,11 @@ Maven project with Google Fleixble Environment with Java 8, Servlet 3.1 and Scal
 
 ## Live
 
-Check out [live](https://iso-scala-us.appspot.com/)
+Check out [live](https://20160806t133737-dot-iso-scala-us.appspot.com/)
 
 ## Run and Deploy
 
-This project is dependent on a second project [servlet-scalajs-compiler](https://github.com/AIMMOTH/scala-js-compiler/tree/servlet-compiler). Either clone and install it with maven or use copy of JAR included in src/main/resources.
+This project is dependent on a second project [servlet-scalajs-compiler](https://github.com/AIMMOTH/scala-js-compiler/tree/jetty-scalajs-compiler). Either clone and install it with maven or use copy of JAR included in src/main/resources.
 
 Use maven and run $ mvn gcloud:run or $ mvn gcloud:deploy. Make sure to have GCloud installed and Python on path!
 
