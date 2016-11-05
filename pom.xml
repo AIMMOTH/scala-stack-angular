@@ -9,11 +9,11 @@
 
   <packaging>war</packaging>
   <name>Scala Stack with Angular</name>
-  <version>0.2-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
 
   <description>Scala Stack using Google Flexible Environment with backend producing HTML, CSS and JavaScript with out any files (.html, .css, .sass, .less, .js) and with out any frontend builders like Gulp or Grunt.</description>
 
-  <url>https://github.com/aimmoth/scala-stack/tree/jquery</url>
+  <url>https://github.com/aimmoth/scala-stack-angular</url>
 
   <developers>
     <developer>
@@ -49,9 +49,9 @@
       <version>3.1.0</version>
     </dependency>
     <dependency>
-      <groupId>com.github.aimmoth.compiler.jetty</groupId>
-      <artifactId>jetty-scalajs-compiler</artifactId>
-      <version>0.2</version>
+      <groupId>com.github.aimmoth.scala.compiler.jetty</groupId>
+      <artifactId>scalajs-compiler-jetty</artifactId>
+      <version>0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.objectify</groupId>
@@ -101,6 +101,8 @@
     </dependency>
 
     <!-- Scala JS Util -->
+    <!-- THESE ARE ALSO INCLUDED IN JAVASCRIPT COMPILER -->
+    <!-- See JavascriptCompiler.scala -->
     <dependency>
       <groupId>org.scala-js</groupId>
       <artifactId>scalajs-dom_sjs0.6_2.11</artifactId>
@@ -111,11 +113,6 @@
       <artifactId>scalajs-angulate_sjs0.6_2.11</artifactId>
       <version>0.2.4</version>
     </dependency>
-<!--     <dependency> -->
-<!--       <groupId>be.doeraene</groupId> -->
-<!--       <artifactId>scalajs-jquery_sjs0.6_2.11</artifactId> -->
-<!--       <version>0.9.0</version> -->
-<!--     </dependency> -->
     <dependency>
       <groupId>com.lihaoyi</groupId>
       <artifactId>scalatags_sjs0.6_2.11</artifactId>

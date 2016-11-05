@@ -16,7 +16,7 @@ import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
 import javax.servlet.FilterConfig
 import javax.ws.rs.GET
-import jvm.filter.compiler.JavascriptCompiler
+import jvm.util.JavascriptCompiler
 
 import org.slf4j.LoggerFactory
 import scalajs.shared.util.JsLogger

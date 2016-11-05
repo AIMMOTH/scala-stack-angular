@@ -1,11 +1,11 @@
-package jvm.filter.compiler
+package jvm.util
 
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpServletRequest
-import com.github.aimmoth.fiddle.ScalaJsCompiler
-import com.github.aimmoth.fiddle.Optimizer
 import scala.io.Source
 import org.slf4j.LoggerFactory
+import com.github.aimmoth.scala.compiler.jetty.Optimizer
+import com.github.aimmoth.scala.compiler.jetty.ScalaJsCompiler
 
 object JavascriptCompiler {
 
@@ -23,7 +23,7 @@ object JavascriptCompiler {
    * Important! These must be compiled to Scala JS!
    */
   private lazy val additionalLibs = List(
-    s"scalajs-jquery_$versions-0.9.0.jar",
+    s"scalajs-angulate_$versions-0.2.4.jar",
     s"scalatags_$versions-0.6.0.jar",
     s"scalajs-dom_$versions-0.9.1.jar",
     s"sourcecode_$versions-0.1.1.jar",

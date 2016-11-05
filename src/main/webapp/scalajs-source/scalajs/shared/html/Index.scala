@@ -19,9 +19,7 @@ object Index {
     // From reflection get "package.Class().method()"
     def methodPath(klass : Class[_], methodName : String) = s"${klass.getCanonicalName}().$methodName()"
 
-//    val postFunction = methodPath(classOf[scalajs.jquery.AjaxRest], "doPost") // scalajs.jquery.AjaxRest().doPost()
-//    val getFunction = methodPath(classOf[scalajs.jquery.AjaxRest], "doGet") // scalajs.jquery.AjaxRest().doGet()
-    val documentReady = methodPath(classOf[scalajs.angular.Document], "ready") // scalajs.jquery.Document().ready()
+    val documentReady = methodPath(classOf[scalajs.angular.AngularModule], "init") // scalajs.angular.AngularModule().init()
 
     val min = if (minified) ".min" else ""
 
@@ -35,7 +33,10 @@ object Index {
         link(rel := "stylesheet", href := s"/css/foundation-icons.css"), // http://zurb.com/playground/foundation-icon-fonts-3
         style2(type_ := "text/css")(css.styleSheetText)),
 
-      body()(
+      body(attr("ng-app") := "app")(
+        div(cls := "row")(
+          div(cls := "large-12 columns")(
+            div(attr("ng-controller") := "scalajs.angular.SimpleController as controller")("Number is: {{ controller.number }}"))),
         div(cls := "row")(
           div(cls := "large-12 columns")(
 
@@ -47,8 +48,7 @@ object Index {
 
             h2("POST Resource"),
             p("Enter number and create a resource!")(
-              input(type_ := "number", value := 1, id := ElementId.resourcePost.toString)
-              ),
+              input(type_ := "number", value := 1, id := ElementId.resourcePost.toString)),
 
             h2("GET Resource"),
             p("Enter an id (already filled in if you recently posted one resource) and GET it")(
@@ -60,6 +60,7 @@ object Index {
             /*
        * TODO: All javascript could be read from resources and bundled into one file.
        */
+            script(src := "/js/vendor/angular-1.5.8.js"),
             script(src := "/js/vendor/jquery.js"),
             script(src := "/js/vendor/what-input.js"),
             script(src := s"/js/vendor/foundation$min.js"),
