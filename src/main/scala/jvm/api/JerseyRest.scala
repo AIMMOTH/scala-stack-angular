@@ -28,7 +28,7 @@ class JerseyRest {
    */
   @POST
   @Produces(Array(MediaType.APPLICATION_JSON))
-  def post(@FormParam("resource") json : String) = {
+  def post(json : String) = {
 
     BackendLogic.create(json) match {
 

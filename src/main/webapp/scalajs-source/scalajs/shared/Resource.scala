@@ -1,6 +1,7 @@
 package scalajs.shared
 
 import scala.scalajs.js
+import scala.scalajs.js.Dynamic
 import scala.scalajs.js.annotation.JSExportAll
 
 /**
@@ -11,4 +12,9 @@ import scala.scalajs.js.annotation.JSExportAll
 case class Resource(var x : Int) {
   
   def this() = this(0)
+}
+
+object ResourceBuilder {
+  
+  def toDynamic(x : Int) = Dynamic.literal(x = x).asInstanceOf[js.Object]
 }

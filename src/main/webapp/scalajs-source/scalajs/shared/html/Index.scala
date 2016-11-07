@@ -7,6 +7,9 @@ import scalajs.shared.Stylisch
 import scalajs.shared.Translations
 import scalatags.Text.all.{ `type` => type_ }
 import scalatags.Text.tags2.{ style => style2, title => title2 }
+import biz.enef.angulate.ScopeController
+import scalajs.angular.SimpleController
+import scalajs.angular.SimpleController
 
 object Id extends Enumeration {
   val javascriptAlert, resourcePostButton, resourceGetButton, resourcePost, resourceGet, resourceOutput = Value
@@ -19,6 +22,7 @@ object Index {
     // From reflection get "package.Class().method()"
     def methodPath(klass : Class[_], methodName : String) = s"${klass.getCanonicalName}().$methodName()"
 
+    val simpleController = classOf[scalajs.angular.SimpleController].getCanonicalName
     val documentReady = methodPath(classOf[scalajs.angular.AngularModule], "init") // scalajs.angular.AngularModule().init()
 
     val min = if (minified) ".min" else ""
@@ -36,7 +40,17 @@ object Index {
       body(attr("ng-app") := "app")(
         div(cls := "row")(
           div(cls := "large-12 columns")(
-            div(attr("ng-controller") := "scalajs.angular.SimpleController as controller")("Number is: {{ controller.number }}"))),
+            div(attr("ng-controller") := simpleController + " as controller")(
+                p("Number is: {{ controller.number }}"),
+                input(type_ := "number", attr("ng-model") := "controller.number"),
+                button(attr("ng-click") := "controller.increse()", cls := "button")("Increse"),
+                button(attr("ng-click") := "controller.decrese()", cls := "button")("Decrese"),
+                input(type_ := "text", attr("ng-model") := "controller.id"),
+                button(attr("ng-click") := "controller.post()", cls := "button")("Post"),
+                button(attr("ng-click") := "controller.get()", cls := "button")("Get")
+                )
+            )
+            ),
         div(cls := "row")(
           div(cls := "large-12 columns")(
 
