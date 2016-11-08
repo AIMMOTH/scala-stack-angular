@@ -12,11 +12,11 @@ Maven project with Google Fleixble Environment with Java 8, Servlet 3.1 and Scal
 
 ## Live
 
-Check out [live](https://20160806t133737-dot-iso-scala-us.appspot.com/)
+Check out [live](https://scala-stack-angular-us.appspot.com/)
 
 ## Run and Deploy
 
-This project is dependent on a second project [servlet-scalajs-compiler](https://github.com/AIMMOTH/scalajs-compiler-jetty). Either clone and install it with maven or use copy of JAR included in src/main/resources.
+This project is dependent on a second project [scalajs-compiler-jetty](https://github.com/AIMMOTH/scalajs-compiler-jetty). Either clone and install it with maven or use copy of JAR included in src/main/resources.
 
 Use maven and run $ mvn gcloud:run or $ mvn gcloud:deploy. Make sure to have GCloud installed and Python on path!
 
