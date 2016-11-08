@@ -44,27 +44,27 @@ object Index {
         div(cls := "row")(
           div(cls := "large-12 columns")(
 
-            div(cls := "callout alert", id := Id.javascriptAlert.toString)(
-              h5("Compiling Scala JS to JavaScript ..."),
-              p("Backend is now compiling Scala JS source code into a JavaScript, it should take a few seconds. Buttons are disabled in the meanwhile.")),
-
-            h1(Translations.documentHeader.get(language)),
-
             div(attr("ng-controller") := simpleController + " as controller")(
-                
+
+              div(cls := "callout alert", attr("ng-hide") := "controller.loaded")(
+                h5("Compiling Scala JS to JavaScript ..."),
+                p("Backend is now compiling Scala JS source code into a JavaScript, it should take a few seconds. Buttons are disabled in the meanwhile.")),
+
+              h1(Translations.documentHeader.get(language)),
+
               h2("POST Resource"),
               p("Enter number and ..."),
-              input(type_ := "number", attr("ng-model") := "controller.number"),
-//              p("Number is: {{ controller.number }}"),
-              button(attr("ng-click") := "controller.increse()", cls := "button")("Increase"),
-              button(attr("ng-click") := "controller.decrese()", cls := "button")("Decrease"),
+              input(type_ := "number", attr("ng-model") := "controller.number", attr("ng-disabled") := "!controller.loaded", disabled := true),
+              //              p("Number is: {{ controller.number }}"),
+              button(attr("ng-click") := "controller.increse()", cls := "button", attr("ng-disabled") := "!controller.loaded", disabled := true)("Increase"),
+              button(attr("ng-click") := "controller.decrese()", cls := "button", attr("ng-disabled") := "!controller.loaded", disabled := true)("Decrease"),
               p("... and create a resource with POST"),
-              button(attr("ng-click") := "controller.post()", cls := "button")("Post"),
-              
+              button(attr("ng-click") := "controller.post()", cls := "button", attr("ng-disabled") := "!controller.loaded", disabled := true)("Post"),
+
               h2("GET Resource"),
               p("GET a resource with a id provided from POST."),
-              input(type_ := "text", attr("ng-model") := "controller.id"),
-              button(attr("ng-click") := "controller.get()", cls := "button")("Get"),
+              input(type_ := "text", attr("ng-model") := "controller.id", attr("ng-disabled") := "!controller.loaded", disabled := true),
+              button(attr("ng-click") := "controller.get()", cls := "button", attr("ng-disabled") := "!controller.loaded", disabled := true)("Get"),
               textarea(disabled := true, attr("ng-model") := "controller.output")),
 
             p("Source at ")(

@@ -15,6 +15,7 @@ class SimpleController($http : HttpService) extends Controller {
   var number = 13
   var id = "0"
   var output = ""
+  var loaded = true
 
   def increse() = number += 1
 
