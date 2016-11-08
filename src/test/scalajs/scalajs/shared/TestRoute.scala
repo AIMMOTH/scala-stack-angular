@@ -23,7 +23,7 @@ class TestRoute {
           case Seq(head, body) =>
             Assert.assertEquals(head.label, "head")
             Assert.assertEquals(body.label, "body")
-            Assert.assertTrue(body.descendant.find(element => element.label == "a" && element \@ "href" == "https://github.com/AIMMOTH/scala-stack/tree/jquery").isDefined)
+            Assert.assertTrue(body.descendant.find(element => element.label == "a" && element \@ "href" == "https://github.com/AIMMOTH/scala-stack-angular").isDefined)
         }
       case Some(_) => Assert.assertTrue(false)
       case None    => Assert.assertTrue(false)

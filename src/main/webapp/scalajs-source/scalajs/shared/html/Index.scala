@@ -22,7 +22,10 @@ object Index {
     // From reflection get "package.Class().method()"
     def methodPath(klass : Class[_], methodName : String) = s"${klass.getCanonicalName}().$methodName()"
 
-    val simpleController = classOf[scalajs.angular.SimpleController].getCanonicalName
+    /*
+     * Get paths to classes with code to prevent refactoring mistakes.
+     */
+    val simpleController = classOf[scalajs.angular.SimpleController].getCanonicalName // scalajs.angular.SimpleController
     val documentReady = methodPath(classOf[scalajs.angular.AngularModule], "init") // scalajs.angular.AngularModule().init()
 
     val min = if (minified) ".min" else ""
@@ -40,19 +43,6 @@ object Index {
       body(attr("ng-app") := "app")(
         div(cls := "row")(
           div(cls := "large-12 columns")(
-            div(attr("ng-controller") := simpleController + " as controller")(
-                p("Number is: {{ controller.number }}"),
-                input(type_ := "number", attr("ng-model") := "controller.number"),
-                button(attr("ng-click") := "controller.increse()", cls := "button")("Increse"),
-                button(attr("ng-click") := "controller.decrese()", cls := "button")("Decrese"),
-                input(type_ := "text", attr("ng-model") := "controller.id"),
-                button(attr("ng-click") := "controller.post()", cls := "button")("Post"),
-                button(attr("ng-click") := "controller.get()", cls := "button")("Get")
-                )
-            )
-            ),
-        div(cls := "row")(
-          div(cls := "large-12 columns")(
 
             div(cls := "callout alert", id := Id.javascriptAlert.toString)(
               h5("Compiling Scala JS to JavaScript ..."),
@@ -60,16 +50,25 @@ object Index {
 
             h1(Translations.documentHeader.get(language)),
 
-            h2("POST Resource"),
-            p("Enter number and create a resource!")(
-              input(type_ := "number", value := 1, id := ElementId.resourcePost.toString)),
+            div(attr("ng-controller") := simpleController + " as controller")(
+                
+              h2("POST Resource"),
+              p("Enter number and ..."),
+              input(type_ := "number", attr("ng-model") := "controller.number"),
+//              p("Number is: {{ controller.number }}"),
+              button(attr("ng-click") := "controller.increse()", cls := "button")("Increase"),
+              button(attr("ng-click") := "controller.decrese()", cls := "button")("Decrease"),
+              p("... and create a resource with POST"),
+              button(attr("ng-click") := "controller.post()", cls := "button")("Post"),
+              
+              h2("GET Resource"),
+              p("GET a resource with a id provided from POST."),
+              input(type_ := "text", attr("ng-model") := "controller.id"),
+              button(attr("ng-click") := "controller.get()", cls := "button")("Get"),
+              textarea(disabled := true, attr("ng-model") := "controller.output")),
 
-            h2("GET Resource"),
-            p("Enter an id (already filled in if you recently posted one resource) and GET it")(
-              input(type_ := "number", id := ElementId.resourceGet.toString),
-              textarea(disabled := true, id := ElementId.resourceOutput.toString)),
-
-            p("Source at ")(a(target := "_blank", href := "https://github.com/AIMMOTH/scala-stack/tree/jquery")("GitHub")),
+            p("Source at ")(
+              a(target := "_blank", href := "https://github.com/AIMMOTH/scala-stack-angular")("GitHub")),
 
             /*
        * TODO: All javascript could be read from resources and bundled into one file.

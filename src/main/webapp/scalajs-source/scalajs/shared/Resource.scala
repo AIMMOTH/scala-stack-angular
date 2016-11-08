@@ -14,7 +14,7 @@ case class Resource(var x : Int) {
   def this() = this(0)
 }
 
-object ResourceBuilder {
+object Resource {
   
   def toDynamic(x : Int) = Dynamic.literal(x = x).asInstanceOf[js.Object]
 }
