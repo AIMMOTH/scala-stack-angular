@@ -23,9 +23,7 @@
   </developers>
 
   <properties>
-    <app.id>iso-scala-us</app.id>
-    <app.version>master</app.version>
-    <appengine.version>1.9.38</appengine.version>
+    <appengine.version>1.9.46</appengine.version>
     <scala.version>2.11.8</scala.version>
     <scala.js.version>0.6.10</scala.js.version>
     <gcloud.plugin.version>2.0.9.121.v20160815</gcloud.plugin.version>

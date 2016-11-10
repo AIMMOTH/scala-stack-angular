@@ -38,7 +38,9 @@ object JavascriptCompiler {
     // Mutable??
     def findSource(path: String): scala.collection.mutable.Set[String] =
       request.getServletContext.getResourcePaths(path).partition(_.endsWith("/")) match {
-        case (folders, files) => files ++ (folders flatMap findSource)
+        case (folders, files) =>
+          log.debug(folders.mkString(", "))
+          files ++ (folders flatMap findSource)
       }
 
     def read(file: String) = {
@@ -46,7 +48,8 @@ object JavascriptCompiler {
       println(s"Adding $file to Scala JS compilation.")
 
       request.getServletContext.getResourceAsStream(file) match {
-        case is => Source.fromInputStream(is).mkString
+        case is => 
+          Source.fromInputStream(is, "UTF-8").mkString
       }
     }
 

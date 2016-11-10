@@ -38,6 +38,8 @@ object Route {
     RequestUriParser(path) match {
       case Right(RequestUriTokens(Some(path), _)) => HelperParser.splitPathBySlash(path).getOrElse(Nil) match {
         case javascript :: _ if javascript.startsWith("javascript") => javascriptCompiler
+        case "_ah" :: _ => None
+        case "WEB-INF" :: _ => None
         case "api" :: _ => None
         case "css" :: _ => None
         case "favicon.ico" :: _ => None
