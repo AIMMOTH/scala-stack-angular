@@ -37,6 +37,7 @@ object Route {
 
     RequestUriParser(path) match {
       case Right(RequestUriTokens(Some(path), _)) => HelperParser.splitPathBySlash(path).getOrElse(Nil) match {
+        case "" :: _ => new Redirect("index.min.html", Languages.default)
         case javascript :: _ if javascript.startsWith("javascript") => javascriptCompiler
         case "_ah" :: _ => None
         case "WEB-INF" :: _ => None
