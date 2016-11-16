@@ -22,7 +22,7 @@ object JavascriptCompiler {
   /*
    * Important! These must be compiled to Scala JS!
    */
-  private lazy val additionalLibs = List(
+  private lazy val additionalLibs = Set(
     s"scalajs-angulate_$versions-0.2.4.jar",
     s"scalatags_$versions-0.6.0.jar",
     s"scalajs-dom_$versions-0.9.1.jar",
