@@ -1,4 +1,4 @@
-# SCALA STACK
+# SCALA STACK with Angular
 
 Scala Stack serve HTML, JavaScript and CSS from Scala code! No frontend build (gulp, grunt), no files (js, css, html, sass, less)!
 
