@@ -8,6 +8,7 @@ import biz.enef.angulate.Controller
 import biz.enef.angulate.core.HttpService
 import scalajs.shared.Resource
 import scala.scalajs.js.JSON
+import scalajs.angular.logic.FrontendLogic
 
 @JSExport
 class SimpleController($http : HttpService) extends Controller {
@@ -17,9 +18,9 @@ class SimpleController($http : HttpService) extends Controller {
   var output = ""
   var loaded = true
 
-  def increse() = number += 1
+  def increase() = number = FrontendLogic.increase(number)
 
-  def decrese() = number -= 1
+  def decrease() = number = FrontendLogic.decrease(number)
 
   def post() = $http.post("/api/v1/resource", Resource.toDynamic(number)).success{
       x : js.Object => 

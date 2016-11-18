@@ -11,7 +11,6 @@ import com.googlecode.objectify.annotation.Entity
 
 import jvm.api.logic.BackendLogic
 import jvm.datastore.Objectify
-import scalajs.jquery.logic.FrontendLogic
 import com.googlecode.objectify.ObjectifyService
 import com.googlecode.objectify.util.Closeable
 import org.slf4j.LoggerFactory
@@ -19,6 +18,7 @@ import com.google.gson.Gson
 import scalajs.shared.util.OK
 import scalajs.shared.util.KO
 import jvm.builder.LoggerBuilder
+import scalajs.angular.logic.FrontendLogic
 
 class TransTest {
 
@@ -41,41 +41,9 @@ class TransTest {
     helper.tearDown()
   }
 
-  /**
-   * Test
-   * <ol>
-   * <li>frontend post</li>
-   * <li>backend save</li>
-   * <li>frontend get</li>
-   * <li>backend read</li>
-   * </ol>
-   */
   @Test
   def post : Unit = {
-
-    FrontendLogic.post(22, resource => {
-      BackendLogic.create(gson.toJson(resource)) match {
-        case OK(resourceEntity) =>
-          Assert.assertTrue(resourceEntity.r.x == 22)
-          Assert.assertTrue(resourceEntity.id != null)
-
-          val long = resourceEntity.id
-
-          FrontendLogic.get(resourceEntity.id, long => ()) match {
-            case OK(unit) =>
-              BackendLogic.read(resourceEntity.id) match {
-                case OK(entity) =>
-                  Assert.assertTrue(resourceEntity.id == entity.id)
-                case KO(throwable) =>
-                  throw throwable
-              }
-            case KO(throwable) =>
-              throw throwable
-          }
-
-        case KO(throwable) =>
-          throw throwable
-      }
-    })
+    Assert.assertTrue(FrontendLogic.increase(1) == 2)
+    Assert.assertTrue(FrontendLogic.decrease(1) == 0)
   }
 }

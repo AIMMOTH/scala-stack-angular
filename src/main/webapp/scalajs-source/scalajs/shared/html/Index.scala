@@ -56,9 +56,9 @@ object Index {
               p("Enter number and ..."),
               input(type_ := "number", attr("ng-model") := "controller.number", attr("ng-disabled") := "!controller.loaded", disabled := true),
               //              p("Number is: {{ controller.number }}"),
-              button(attr("ng-click") := "controller.increse()", cls := "button", attr("ng-disabled") := "!controller.loaded", disabled := true)("Increase"),
-              button(attr("ng-click") := "controller.decrese()", cls := "button", attr("ng-disabled") := "!controller.loaded", disabled := true)("Decrease"),
-              p("... and create a resource with POST"),
+              button(attr("ng-click") := "controller.increase()", cls := "button", attr("ng-disabled") := "!controller.loaded", disabled := true)("Increase"),
+              button(attr("ng-click") := "controller.decrease()", cls := "button", attr("ng-disabled") := "!controller.loaded", disabled := true)("Decrease"),
+              p("... create a resource with POST"),
               button(attr("ng-click") := "controller.post()", cls := "button", attr("ng-disabled") := "!controller.loaded", disabled := true)("Post"),
 
               h2("GET Resource"),
