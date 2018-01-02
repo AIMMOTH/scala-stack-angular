@@ -5,11 +5,12 @@
 <!--     <setting name="java_quickstart" value="true" /> -->
 <!--   </beta-settings> -->
   
-  <application>iso-scala-us</application>
+  <application>scala-stack-angular</application>
   <version>master</version>
   
+  <runtime>java8</runtime>
+  
   <threadsafe>true</threadsafe>
-  <vm>true</vm>
   
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
