@@ -1,6 +1,6 @@
 # SCALA STACK with Angular
 
-Scala Stack serve HTML, JavaScript and CSS from Scala code! No frontend build (gulp, grunt), no files (js, css, html, sass, less)!
+Scala Stack serve HTML, JavaScript and CSS from Scala code! No frontend build (gulp, grunt), no files (js, css, html, sass, less)! No SBT since a servlet is compiling.
 
 ## Description
 
@@ -8,11 +8,11 @@ In this project, a servlet serve a HTML file build with ScalaTags, and another s
 
 ## Environment
 
-Maven project with Google Fleixble Environment with Java 8, Servlet 3.1 and Scala 2.11.
+Maven project with Google Standard Environment with Java 8, Servlet 3.1 and Scala 2.11.
 
 ## Live
 
-Check out [live](https://scala-stack-angular-us.appspot.com/)
+Check out [live](https://scala-stack-angular.appspot.com/)
 
 ## Run and Deploy
 

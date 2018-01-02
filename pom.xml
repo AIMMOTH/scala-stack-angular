@@ -9,9 +9,9 @@
 
   <packaging>war</packaging>
   <name>Scala Stack with Angular</name>
-  <version>0.1</version>
+  <version>0.2</version>
 
-  <description>Scala Stack using Google Flexible Environment with backend producing HTML, CSS and JavaScript with out any files (.html, .css, .sass, .less, .js) and with out any frontend builders like Gulp or Grunt. Does not need SBT since Scala JS is compiled with a servlet.</description>
+  <description>Scala Stack using Google Standard Environment with backend producing HTML, CSS and JavaScript with out any files (.html, .css, .sass, .less, .js) and with out any frontend builders like Gulp or Grunt. Does not need SBT since Scala JS is compiled with a servlet.</description>
 
   <url>https://github.com/aimmoth/scala-stack-angular</url>
 
@@ -24,7 +24,7 @@
 
   <properties>
     <appengine.version>1.9.46</appengine.version>
-    <scala.version>2.11.8</scala.version>
+    <scala.version>2.11.12</scala.version>
     <scala.js.version>0.6.10</scala.js.version>
     <gcloud.plugin.version>2.0.9.121.v20160815</gcloud.plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
