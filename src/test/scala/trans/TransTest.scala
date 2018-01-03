@@ -13,17 +13,17 @@ import jvm.api.logic.BackendLogic
 import jvm.datastore.Objectify
 import com.googlecode.objectify.ObjectifyService
 import com.googlecode.objectify.util.Closeable
-import org.slf4j.LoggerFactory
 import com.google.gson.Gson
 import scalajs.shared.util.OK
 import scalajs.shared.util.KO
 import jvm.builder.LoggerBuilder
 import scalajs.angular.logic.FrontendLogic
+import java.util.logging.Logger
 
 class TransTest {
 
   lazy val gson = new Gson
-  val logger = LoggerFactory.getLogger(getClass)
+  val logger = Logger.getLogger(getClass.getName)
   implicit def jsLogger = LoggerBuilder(logger)
   val helper = new LocalServiceTestHelper()
   var closable : Closeable = null

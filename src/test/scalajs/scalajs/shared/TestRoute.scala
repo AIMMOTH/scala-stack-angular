@@ -1,17 +1,17 @@
 package jvm.util
 
 import scalatags.Text.all._
-import org.slf4j.LoggerFactory
 import jvm.builder.LoggerBuilder
 import scalatags.Text._
 import org.junit.Assert
 import scala.xml.XML
 import org.junit.Test
 import scalajs.shared.Route
+import java.util.logging.Logger
 
 class TestRoute {
 
-  implicit def logger = LoggerBuilder(LoggerFactory.getLogger(getClass))
+  implicit def logger = LoggerBuilder(Logger.getLogger(getClass.getName))
 
   @Test
   def testRoute : Unit = {

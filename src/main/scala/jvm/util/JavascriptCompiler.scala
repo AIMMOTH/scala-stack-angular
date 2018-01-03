@@ -3,13 +3,13 @@ package jvm.util
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpServletRequest
 import scala.io.Source
-import org.slf4j.LoggerFactory
 import com.github.aimmoth.scala.compiler.jetty.Optimizer
 import com.github.aimmoth.scala.compiler.jetty.ScalaJsCompiler
+import java.util.logging.Logger
 
 object JavascriptCompiler {
 
-  private lazy val log = LoggerFactory.getLogger(getClass)
+  private lazy val log = Logger.getLogger(getClass.getName)
 
   private lazy val sjsVersion = "sjs0.6"
   private lazy val scalaVersion = "2.11"
@@ -39,12 +39,12 @@ object JavascriptCompiler {
     def findSource(path: String): scala.collection.mutable.Set[String] =
       request.getServletContext.getResourcePaths(path).partition(_.endsWith("/")) match {
         case (folders, files) =>
-          log.debug(folders.mkString(", "))
+          log.fine(folders.mkString(", "))
           files ++ (folders flatMap findSource)
       }
 
     def read(file: String) = {
-      log.debug(s"Adding $file to Scala JS compilation.")
+      log.fine(s"Adding $file to Scala JS compilation.")
       println(s"Adding $file to Scala JS compilation.")
 
       request.getServletContext.getResourceAsStream(file) match {

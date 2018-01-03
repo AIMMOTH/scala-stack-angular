@@ -1,8 +1,5 @@
 package jvm.api
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
-
 import com.google.gson.Gson
 
 import jvm.api.logic.BackendLogic
@@ -12,6 +9,7 @@ import javax.ws.rs.core._
 import scalajs.shared.util.OK
 import scalajs.shared.util.KO
 import jvm.builder.LoggerBuilder
+import java.util.logging.Logger
 
 /**
  * Untested code. All logic is put into BackendLogic
@@ -20,8 +18,8 @@ import jvm.builder.LoggerBuilder
 class JerseyRest {
 
   private lazy val gson = new Gson
-  private lazy val logger = LoggerFactory.getLogger(getClass)
-  private implicit lazy val jsLogger = LoggerBuilder(logger)
+  private lazy val log = Logger.getLogger(getClass.getName)
+  private implicit lazy val jsLogger = LoggerBuilder(log)
 
   /**
    * POST http://localhost:8080/api/v1/resource
@@ -50,7 +48,7 @@ class JerseyRest {
   @Produces(Array(MediaType.APPLICATION_JSON))
   def get(@PathParam("id") id : java.lang.Long) = {
 
-    logger.info("Get!")
+    log.info("Get!")
 
     BackendLogic.read(id) match {
       case OK(entity) =>

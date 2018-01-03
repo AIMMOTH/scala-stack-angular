@@ -1,19 +1,19 @@
 package jvm.builder
 
 import scalajs.shared.util.JsLogger
-import org.slf4j.LoggerFactory
-import org.slf4j.Logger
+import java.util.logging.Logger
+import java.util.logging.Level
 
 object LoggerBuilder {
   
   def apply(log : Logger) = {
     new JsLogger {
       def info(message : String) = log.info(message)
-      def debug(message : String) = log.debug(message)
-      def warning(message : String) = log.warn(message)
-      def warning(throwable : Throwable) = log.warn(throwable.getMessage, throwable)
-      def error(message : String) = log.error(message)
-      def error(throwable : Throwable) = log.error(throwable.getMessage, throwable)
+      def debug(message : String) = log.fine(message)
+      def warning(message : String) = log.warning(message)
+      def warning(throwable : Throwable) = log.log(Level.WARNING, throwable.getMessage, throwable)
+      def error(message : String) = log.warning(message)
+      def error(throwable : Throwable) = log.log(Level.WARNING, throwable.getMessage, throwable)
     }
   }
 }

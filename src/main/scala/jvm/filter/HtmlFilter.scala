@@ -18,19 +18,20 @@ import javax.servlet.FilterConfig
 import javax.ws.rs.GET
 import jvm.util.JavascriptCompiler
 
-import org.slf4j.LoggerFactory
 import scalajs.shared.util.JsLogger
 import jvm.builder.LoggerBuilder
 import scalajs.shared.util.RequestUriParser
 import java.lang.ProcessBuilder.Redirect
 import scalajs.shared.Route
+import java.util.logging.Logger
 
 /**
  * Catch all filter for html, css, api, Javascript compiler, 404 etc
  */
 class HtmlFilter extends Filter {
 
-  implicit val logger = LoggerBuilder(LoggerFactory.getLogger(getClass))
+  private lazy val log = Logger.getLogger(getClass.getName)
+  implicit val logger = LoggerBuilder(log)
 
   override def doFilter(request : ServletRequest, response : ServletResponse, chain : FilterChain) = {
 
@@ -38,7 +39,7 @@ class HtmlFilter extends Filter {
       implicit def toHttpRequest(request : ServletRequest) = request.asInstanceOf[HttpServletRequest]
       implicit def toHttpResponse(response : ServletResponse) = response.asInstanceOf[HttpServletResponse]
 
-      logger.info(RequestUriParser(request.getRequestURI).toString)
+      log.info(RequestUriParser(request.getRequestURI).toString)
 
       Route(request.getRequestURI) match {
         case None =>
