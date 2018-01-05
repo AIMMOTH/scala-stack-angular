@@ -3,33 +3,18 @@ package jvm.util
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpServletRequest
 import scala.io.Source
-import com.github.aimmoth.scala.compiler.jetty.Optimizer
-import com.github.aimmoth.scala.compiler.jetty.ScalaJsCompiler
+import com.github.aimmoth.scalajs.compiler.servlet.Optimizer
+import com.github.aimmoth.scalajs.compiler.servlet.ScalaJsCompiler
 import java.util.logging.Logger
+import jvm.servletcontext.WebServletContextListener
 
 object JavascriptCompiler {
 
   private lazy val log = Logger.getLogger(getClass.getName)
 
-  private lazy val sjsVersion = "sjs0.6"
-  private lazy val scalaVersion = "2.11"
-  private lazy val versions = sjsVersion + "_" + scalaVersion // "sjs0.6_2.11"
-
   // Ending slash is important!
   private lazy val scalaJsSource = "/scalajs-source/"
-  private lazy val relativeJarPath = "/WEB-INF/lib/"
 
-  /*
-   * Important! These must be compiled to Scala JS!
-   */
-  private lazy val additionalLibs = Set(
-    s"scalajs-angulate_$versions-0.2.4.jar",
-    s"scalatags_$versions-0.6.0.jar",
-    s"scalajs-dom_$versions-0.9.1.jar",
-    s"sourcecode_$versions-0.1.1.jar",
-    s"scala-parser-combinators_$versions-1.0.2.jar",
-    s"upickle_$versions-0.4.1.jar"
-    )
 
   def apply(request: HttpServletRequest, response: HttpServletResponse) = {
 
@@ -60,13 +45,10 @@ object JavascriptCompiler {
           case _ => Optimizer.Fast
         }
 
-        new ScalaJsCompiler match {
-          case compiler =>
-            compiler.compileScalaJsStrings(request.getServletContext, sources.toList, optimizer, relativeJarPath, additionalLibs) match {
-              case script: String => response.getWriter.println(script)
-            }
+        WebServletContextListener.scalaJsCompiler.compileScalaJsStrings(sources.toList, optimizer) match {
+          case script: String => response.getWriter.println(script)
         }
-    }
+      }
 
   }
 }

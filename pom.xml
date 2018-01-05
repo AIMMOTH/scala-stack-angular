@@ -47,9 +47,9 @@
       <version>3.1.0</version>
     </dependency>
     <dependency>
-      <groupId>com.github.aimmoth.scala.compiler.jetty</groupId>
-      <artifactId>scalajs-compiler-jetty</artifactId>
-      <version>1.2</version>
+      <groupId>com.github.aimmoth.scalajs.compiler.servlet</groupId>
+      <artifactId>scalajs-compiler-servlet</artifactId>
+      <version>2.0-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.objectify</groupId>

@@ -8,6 +8,10 @@
   
   <threadsafe>true</threadsafe>
   
+  <!-- Needs memory and computing power to beat 60s reqiest deadline limit! -->
+  <!-- https://cloud.google.com/appengine/docs/standard/#instance_classes -->
+  <instance-class>F4</instance-class>
+  
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
   </system-properties>
