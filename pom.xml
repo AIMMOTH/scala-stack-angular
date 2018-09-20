@@ -23,9 +23,36 @@
   </developers>
 
   <properties>
-    <appengine.version>1.9.46</appengine.version>
+    <app.id>scala-stack-angular</app.id>
+    <app.version>master</app.version>
+
+    <!-- IMPORTANT -->
+    <!-- This is also set in WebServletContextListener.scala -->
+    <scalajs.source>src/main/webapp/scalajs-source</scalajs.source>
+
+    <!-- IMPORTANT -->
+    <!-- Versions is also set in WebServletContextListener.scala -->
+    
+    <!-- https://mvnrepository.com/artifact/com.google.appengine/appengine-api-1.0-sdk/1.9.64 -->
+    <appengine.version>1.9.64</appengine.version>
+    <!-- https://mvnrepository.com/artifact/org.scala-lang/scala-library/2.11.12 -->
     <scala.version>2.11.12</scala.version>
-    <scala.js.version>0.6.21</scala.js.version>
+    <!-- https://mvnrepository.com/artifact/org.scala-js/scalajs-library_2.11/0.6.25 -->
+    <scalajs.version>0.6.25</scalajs.version>
+    <!-- https://mvnrepository.com/artifact/org.scala-js/scalajs-dom_sjs0.6_2.11/0.9.6 -->
+    <scalajs.dom.version>0.9.6</scalajs.dom.version>
+    <!-- https://mvnrepository.com/artifact/biz.enef/scalajs-angulate_sjs0.6_2.11/0.2.4 -->
+    <scalajs.angulate.version>0.2.4</scalajs.angulate.version>
+    <!-- https://mvnrepository.com/artifact/com.lihaoyi/scalatags_sjs0.6_2.11/0.6.7 -->
+    <scalatags.version>0.6.7</scalatags.version>
+    <!-- https://mvnrepository.com/artifact/com.lihaoyi/upickle_sjs0.6_2.11/0.6.6 -->
+    <upickle.version>0.6.6</upickle.version>
+    <!-- https://mvnrepository.com/artifact/org.scala-lang.modules/scala-parser-combinators_sjs0.6_2.11/1.1.1 -->
+    <scalajs.parser.combinators.version>1.1.1</scalajs.parser.combinators.version>
+
+    <scalajs.compiler.version>0.3</scalajs.compiler.version>
+    <!-- https://mvnrepository.com/artifact/com.googlecode.objectify/objectify/5.1.22 -->
+    <objectify.version>5.1.22</objectify.version>
     <gcloud.plugin.version>2.0.9.121.v20160815</gcloud.plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
@@ -49,12 +76,12 @@
     <dependency>
       <groupId>com.github.aimmoth.scalajs.compiler.servlet</groupId>
       <artifactId>scalajs-compiler-servlet</artifactId>
-      <version>2.0-SNAPSHOT</version>
+      <version>${scalajs.compiler.version}</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.objectify</groupId>
       <artifactId>objectify</artifactId>
-      <version>5.1.11</version>
+      <version>${objectify.version}</version>
     </dependency>
     <dependency>
       <groupId>org.glassfish.jersey.containers</groupId>
@@ -85,17 +112,17 @@
     <dependency>
       <groupId>org.scala-js</groupId>
       <artifactId>scalajs-compiler_2.11.8</artifactId>
-      <version>${scala.js.version}</version>
+      <version>${scalajs.version}</version>
     </dependency>
     <dependency>
       <groupId>org.scala-js</groupId>
       <artifactId>scalajs-library_2.11</artifactId>
-      <version>${scala.js.version}</version>
+      <version>${scalajs.version}</version>
     </dependency>
     <dependency>
       <groupId>org.scala-js</groupId>
       <artifactId>scalajs-tools_2.11</artifactId>
-      <version>${scala.js.version}</version>
+      <version>${scalajs.version}</version>
     </dependency>
 
     <!-- Scala JS Util -->
@@ -104,27 +131,27 @@
     <dependency>
       <groupId>org.scala-js</groupId>
       <artifactId>scalajs-dom_sjs0.6_2.11</artifactId>
-      <version>0.9.1</version>
+      <version>${scalajs.dom.version}</version>
     </dependency>
     <dependency>
       <groupId>biz.enef</groupId>
       <artifactId>scalajs-angulate_sjs0.6_2.11</artifactId>
-      <version>0.2.4</version>
+      <version>${scalajs.angulate.version}</version>
     </dependency>
     <dependency>
       <groupId>com.lihaoyi</groupId>
       <artifactId>scalatags_sjs0.6_2.11</artifactId>
-      <version>0.6.0</version>
+      <version>${scalatags.version}</version>
     </dependency>
     <dependency>
       <groupId>com.lihaoyi</groupId>
       <artifactId>upickle_sjs0.6_2.11</artifactId>
-      <version>0.4.1</version>
+      <version>${upickle.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.scala-js</groupId>
+      <groupId>org.scala-lang.modules</groupId>
       <artifactId>scala-parser-combinators_sjs0.6_2.11</artifactId>
-      <version>1.0.2</version>
+      <version>${scalajs.parser.combinators.version}</version>
     </dependency>
 
     <dependency>
@@ -193,13 +220,7 @@
             </goals>
             <configuration>
               <sources>
-
-                <!-- IMPORTANT -->
-                <!-- This is also set in JavascriptCompiler.scala -->
-
-                <source>src/main/webapp/scalajs-source</source>
-
-
+                <source>${scalajs.source}</source>
               </sources>
             </configuration>
           </execution>

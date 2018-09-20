@@ -35,15 +35,24 @@ class WebServletContextListener extends ServletContextListener {
   /*
    * Important! These must be compiled to Scala JS!
    */
-  lazy val additionalLibs = Set(
-    s"scalajs-angulate_$versions-0.2.4.jar",
-    s"scalatags_$versions-0.6.0.jar",
-    s"scalajs-dom_$versions-0.9.1.jar",
-    s"sourcecode_$versions-0.1.1.jar",
-    s"scala-parser-combinators_$versions-1.0.2.jar",
-    s"upickle_$versions-0.4.1.jar"
-    )
+//  lazy val additionalLibs = Set(
+//    s"scalajs-angulate_$versions-0.2.4.jar",
+//    s"scalatags_$versions-0.6.0.jar",
+//    s"scalajs-dom_$versions-0.9.1.jar",
+//    s"sourcecode_$versions-0.1.1.jar",
+//    s"scala-parser-combinators_$versions-1.0.2.jar",
+//    s"upickle_$versions-0.4.1.jar"
+//    )
   
+  lazy val additionalLibs = List(
+    ("scalajs-angulate", "0.2.4"),
+    ("scalatags", "0.6.7"),
+    ("scalajs-dom", "0.9.6"),
+    ("sourcecode", "0.1.4"),
+    ("scala-parser-combinators", "1.1.1"),
+    ("upickle", "0.6.6"))
+    .map(pair => pair._1 + s"_$versions-" + pair._2 + ".jar").toSet
+    
   def contextDestroyed(context: ServletContextEvent): Unit = {
   }
 

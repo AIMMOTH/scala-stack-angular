@@ -18,7 +18,7 @@ object JavascriptCompiler {
 //      case _ => Optimizer.Fast
 //    }
     
-    response.getWriter.println(WebServletContextListener.script)
+//    response.getWriter.println(WebServletContextListener.script)
 
   }
 }
