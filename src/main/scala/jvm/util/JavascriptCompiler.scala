@@ -13,12 +13,11 @@ object JavascriptCompiler {
 
   def apply(request: HttpServletRequest, response: HttpServletResponse) = {
     
-//    val optimizer = request.getRequestURI match {
-//      case uri if uri.endsWith(".min.js") => Optimizer.Full
-//      case _ => Optimizer.Fast
-//    }
+    val optimizer = request.getRequestURI match {
+      case uri if uri.endsWith(".min.js") => Optimizer.Full
+      case _ => Optimizer.Fast
+    }
     
-//    response.getWriter.println(WebServletContextListener.script)
-
+    response.getWriter.println(WebServletContextListener.script)
   }
 }

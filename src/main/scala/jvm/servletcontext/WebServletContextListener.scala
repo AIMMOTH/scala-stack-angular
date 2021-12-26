@@ -11,9 +11,7 @@ import com.github.aimmoth.scalajs.compiler.servlet.Optimizer
 
 object WebServletContextListener {
 
-//  var scalaJsCompiler : ScalaJsCompiler = null
   var script : String = null
-  
 }
 
 @WebListener
@@ -21,8 +19,6 @@ class WebServletContextListener extends ServletContextListener {
   
   private lazy val log = Logger.getLogger(getClass.getName)
 
-//  lazy val scalaJsCompiler = new ScalaJsCompiler 
-  
   // Ending slash is important!
   private lazy val scalaJsSource = "/scalajs-source/"
 
@@ -31,33 +27,21 @@ class WebServletContextListener extends ServletContextListener {
   lazy val versions = sjsVersion + "_" + scalaVersion // "sjs0.6_2.11"
   
   lazy val relativeJarPath = "/WEB-INF/lib/"
-
-  /*
-   * Important! These must be compiled to Scala JS!
-   */
-//  lazy val additionalLibs = Set(
-//    s"scalajs-angulate_$versions-0.2.4.jar",
-//    s"scalatags_$versions-0.6.0.jar",
-//    s"scalajs-dom_$versions-0.9.1.jar",
-//    s"sourcecode_$versions-0.1.1.jar",
-//    s"scala-parser-combinators_$versions-1.0.2.jar",
-//    s"upickle_$versions-0.4.1.jar"
-//    )
   
   lazy val additionalLibs = List(
     ("scalajs-angulate", "0.2.4"),
-    ("scalatags", "0.6.7"),
-    ("scalajs-dom", "0.9.6"),
-    ("sourcecode", "0.1.4"),
-    ("scala-parser-combinators", "1.1.1"),
-    ("upickle", "0.6.6"))
+    ("scalatags", "0.6.8"),
+    ("scalajs-dom", "0.9.8"),
+    ("sourcecode", "0.1.5"),
+    ("scala-parser-combinators", "1.1.2"),
+    ("upickle", "1.4.3"))
     .map(pair => pair._1 + s"_$versions-" + pair._2 + ".jar").toSet
     
   def contextDestroyed(context: ServletContextEvent): Unit = {
   }
 
   def contextInitialized(contextEvent: ServletContextEvent): Unit = {
-    
+
     val context = contextEvent.getServletContext
     
     val scalaJsCompiler = new ScalaJsCompiler

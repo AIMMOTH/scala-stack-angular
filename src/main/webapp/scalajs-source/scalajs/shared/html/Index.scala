@@ -73,7 +73,7 @@ object Index {
             /*
        * TODO: All javascript could be read from resources and bundled into one file.
        */
-            script(src := "/js/vendor/angular-1.5.8.js"),
+            script(src := "/js/vendor/angular-1.8.2.js"),
             script(src := "/js/vendor/jquery.js"),
             script(src := "/js/vendor/what-input.js"),
             script(src := s"/js/vendor/foundation$min.js"),

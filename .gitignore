@@ -13,3 +13,5 @@
 /src/main/webapp/WEB-INF/lib/
 /target/
 /WEB-INF/
+/.idea/
+*.iml
