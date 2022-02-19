@@ -1,13 +1,17 @@
 package jvm.servletcontext
 
+import com.github.aimmoth.scalajs.compiler.{ScalaJsCompiler, ScalaJsFile}
+
 import javax.servlet.ServletContextListener
 import javax.servlet.annotation.WebListener
 import javax.servlet.ServletContextEvent
-import com.github.aimmoth.scalajs.compiler.servlet.ScalaJsCompiler
+
 import javax.servlet.ServletContext
 import java.util.logging.Logger
 import scala.io.Source
-import com.github.aimmoth.scalajs.compiler.servlet.Optimizer
+import com.github.scalafiddle.Optimizer
+
+import java.io.InputStream
 
 object WebServletContextListener {
 
@@ -43,9 +47,10 @@ class WebServletContextListener extends ServletContextListener {
   def contextInitialized(contextEvent: ServletContextEvent): Unit = {
 
     val context = contextEvent.getServletContext
+    val loader: (String => InputStream) = (path) => contextEvent.getServletContext.getResourceAsStream(path)
     
-    val scalaJsCompiler = new ScalaJsCompiler
-    scalaJsCompiler.init(context, relativeJarPath, additionalLibs)
+    val scalaJsCompiler = ScalaJsCompiler()
+    scalaJsCompiler.init(loader, relativeJarPath, additionalLibs)
     
     // Compile!
     import scala.collection.JavaConversions._
@@ -58,12 +63,13 @@ class WebServletContextListener extends ServletContextListener {
           files ++ (folders flatMap findSource)
       }
 
-    def read(file: String) = {
+    def read(file: String) : ScalaJsFile = {
       log.fine(s"Adding $file to Scala JS compilation.")
 
       context.getResourceAsStream(file) match {
         case is => 
-          Source.fromInputStream(is, "UTF-8").mkString
+          val source = Source.fromInputStream(is, "UTF-8").mkString
+          ScalaJsFile(file, source)
       }
     }
 
@@ -71,8 +77,10 @@ class WebServletContextListener extends ServletContextListener {
       case sources =>
 
         scalaJsCompiler.compileScalaJsStrings(sources.toList, Optimizer.Fast) match {
-          case script: String => 
-            WebServletContextListener.script = script
+          case script if script.isRight =>
+            WebServletContextListener.script = script.right.get
+          case error =>
+            log.severe(error.left.get)
         }
       }
   }

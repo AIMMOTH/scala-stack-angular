@@ -12,7 +12,7 @@ In this project, a servlet serve a HTML file build with ScalaTags, and another s
 
 - Google Standard Environment (Java 8) https://cloud.google.com/appengine/docs/standard/long-term-support#java8
 - Scala 2.11.12 https://github.com/scala/scala/releases/tag/v2.11.12 
-- AngularJS 1.8.2 https://docs.angularjs.org/misc/version-support-status 
+- AngularJS 1.5.11 (ScalaJS Angulate isn't updated since) https://docs.angularjs.org/misc/version-support-status 
 - Foundation 6.2.3 https://github.com/foundation/foundation-sites/releases/tag/v6.7.4
 
 It's a Maven project with Jetty and Jersey.
@@ -23,9 +23,13 @@ Check out [live](https://scala-stack-angular.appspot.com/)
 
 ## Run and Deploy
 
-This project is dependent on a second project [scalajs-compiler-servlet](https://github.com/AIMMOTH/scalajs-compiler-servlet/tree/v0.3). Either clone and install it with maven or use copy of JAR included in src/main/resources.
+This project is dependent on a second project [scalajs-compiler-servlet](https://github.com/AIMMOTH/scalajs-compiler-servlet/tree/v0.3).
 
-Use maven and run > mvn appengine:run or > mvn appengine:deploy.
+1. Install maven and set Maven JAVA_HOME to JDK 8
+2. Install with Maven [scalajs-compiler-servlet](https://github.com/AIMMOTH/scalajs-compiler-servlet/tree/v0.3) which this project is dependent on. 
+3. Build with > mvn clean package 
+4. Run > mvn appengine:run
+5. Open http://localhost:8080 with Chrome (not tested with other browsers).
 
 ## Details
 

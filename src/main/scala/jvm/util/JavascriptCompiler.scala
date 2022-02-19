@@ -1,11 +1,11 @@
 package jvm.util
 
-import java.util.logging.Logger
+import com.github.scalafiddle.Optimizer
 
+import java.util.logging.Logger
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import jvm.servletcontext.WebServletContextListener
-import com.github.aimmoth.scalajs.compiler.servlet.Optimizer
 
 object JavascriptCompiler {
 

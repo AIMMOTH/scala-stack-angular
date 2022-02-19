@@ -22,11 +22,13 @@ class SimpleController($http : HttpService) extends Controller {
 
   def decrease() = number = FrontendLogic.decrease(number)
 
+  // Angulate uses AngularJS 1.5 https://code.angularjs.org/1.5.10/docs/api/ng/service/$http#deprecation-notice
   def post() = $http.post("/api/v1/resource", Resource.toDynamic(number)).success{
       x : js.Object => 
         id = x.toString
       }
 
+  // Angulate uses AngularJS 1.5 https://code.angularjs.org/1.5.10/docs/api/ng/service/$http#deprecation-notice
   def get() = $http.get("/api/v1/resource/" + id).success{
       x : js.Object => 
         output = JSON.stringify(x)
